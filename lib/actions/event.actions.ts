@@ -40,8 +40,8 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
     if (!userId) {
       throw new Error("userId is undefined. Make sure it's passed correctly from the frontend.");
     }
+    const organizer = await User.findOne({ clerkId: userId });
 
-    const organizer = await User.findById(userId);
     if (!organizer) {
       throw new Error(`Organizer not found with userId: ${userId}`);
     }
@@ -49,7 +49,7 @@ export async function createEvent({ userId, event, path }: CreateEventParams) {
     const newEvent = await Event.create({
       ...event,
       category: event.categoryId,
-      organizer: userId,
+      organizer: organizer._id, // Use MongoDB ObjectId
     });
     revalidatePath(path);
 

@@ -40,6 +40,7 @@ type EventFormProps = {
 
 export const EventForm = ({ userId, type, event, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<File[]>([]);
+  console.log("EventForm received userId:", userId); 
   const initialValues =
     event && type === "Update"
       ? {

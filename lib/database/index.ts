@@ -12,7 +12,7 @@ export const connectToDatabase = async () => {
   cached.promise =
     cached.promise ||
     mongoose.connect(MONGODB_URI, {
-      dbName: "infinity coders",
+      dbName: "evently",
       bufferCommands: false,
     });
 

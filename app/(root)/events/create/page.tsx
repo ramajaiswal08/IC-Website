@@ -1,10 +1,10 @@
+"use client";
+
 import { EventForm } from "@/components/shared/event-form";
-import { auth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 
 const CreateEvent = () => {
-  const { sessionClaims } = auth();
-
-  const userId = sessionClaims?.userId as string;
+  const { userId } = useAuth(); // ✅ Correct way to get userId in a client component
 
   return (
     <>
@@ -15,7 +15,7 @@ const CreateEvent = () => {
       </section>
 
       <div className="wrapper my-8">
-        <EventForm userId={userId} type="Create" />
+        <EventForm userId={userId || ""} type="Create" />
       </div>
     </>
   );
